@@ -5,7 +5,7 @@
 # This file is part of "8-puzzle" and is licensed under the 
 # GNU General Public License v3.0 (GPLv3).
 # See <https://www.gnu.org/licenses/gpl-3.0.en.html> for details.
-# 2026-06-02: 朝日謙伍
+# 2026-06-02: Igakg
 #   - [変更内容1: initにset()を追加、10回生成において、前の状態をリセットする]
 # ==============================================================================
 
