@@ -37,7 +37,7 @@ IDS・A*(h0)・A*(h1)・A*(h2) の4アルゴリズムを対象に、各100回の
 ### インストール
 
 ```bash
-git clone https://github.com/your-username/8-puzzle-performance-comparison.git
+git clone https://github.com/Igakg/8-puzzle-performance-comparison.git
 cd 8-puzzle-performance-comparison
 pip install numpy
 ```
@@ -58,21 +58,23 @@ python main.py ids 1,2,5,3,4,0,6,7,8
 python main.py ast2 1,2,5,3,4,0,6,7,8
 ```
 
-### ランダム初期状態で100回実行
+### ランダム初期状態で実行
 
 ```bash
-python main.py <アルゴリズム> random
+python main.py <アルゴリズム> random [n]
 ```
+
+`n` で実行回数を指定します（省略時はデフォルト5回）。
 
 例：
 ```bash
-python main.py ids random
-python main.py ast0 random
-python main.py ast1 random
-python main.py ast2 random
+python main.py ids random          # 5回（デフォルト）
+python main.py ast0 random 100     # 100回
+python main.py ast1 random 50
+python main.py ast2 random 100
 ```
 
-`random` モードでは解ける状態のみを生成し、各100回の結果を個別CSVに出力します。
+`random` モードでは解ける状態のみを生成し、各実行結果を個別CSVに出力します。
 
 ---
 

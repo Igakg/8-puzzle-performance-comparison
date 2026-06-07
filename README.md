@@ -4,7 +4,7 @@ A tool to solve the 8-puzzle with multiple search algorithms and compare their p
 Runs IDS, A*(h0), A*(h1), and A*(h2) on 100 random initial states each, outputting results to CSV.
 
 > **Original**: [abpaudel/8-puzzle](https://github.com/abpaudel/8-puzzle) (GPLv3)  
-> **Modified by**: Kengo Asahi (2026)
+> **Modified by**: Igakg (2026)
 
 [日本語版 README はこちら](README.ja.md)
 
@@ -37,7 +37,7 @@ Runs IDS, A*(h0), A*(h1), and A*(h2) on 100 random initial states each, outputti
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/8-puzzle-performance-comparison.git
+git clone https://github.com/Igakg/8-puzzle-performance-comparison.git
 cd 8-puzzle-performance-comparison
 pip install numpy
 ```
@@ -58,18 +58,20 @@ python main.py ids 1,2,5,3,4,0,6,7,8
 python main.py ast2 1,2,5,3,4,0,6,7,8
 ```
 
-### Run 100 times with random initial states
+### Run with random initial states
 
 ```bash
-python main.py <algorithm> random
+python main.py <algorithm> random [n]
 ```
+
+`n` specifies the number of runs (default: 5).
 
 Example:
 ```bash
-python main.py ids random
-python main.py ast0 random
-python main.py ast1 random
-python main.py ast2 random
+python main.py ids random        # runs 5 times (default)
+python main.py ast0 random 100   # runs 100 times
+python main.py ast1 random 50
+python main.py ast2 random 100
 ```
 
 In `random` mode, only solvable states are generated. Results are written to individual CSVs for each run.

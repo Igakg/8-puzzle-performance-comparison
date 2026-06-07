@@ -16,16 +16,10 @@
 #   - [変更内容5: 出力ファイル形式をcsvに変更、cpu関連の出力を削除、ファイル名も"{alg}_output1.csv"に変更]
 #   - [変更内容6: randomで生成した場合に10回生成]
 #   - [変更内容7: ast0,ast1,ast2クラスをインポートするように変更、入力に応じてこれらのクラスを用いるように変更]
+# 2026-06-07: Igakg
+#   - [変更内容8: 第3引数でランダム実行回数を指定可能に変更、状態指定時は1回のみ実行]
 # ==============================================================================
-"""
-How to run:
-$ python main.py ids 1,2,5,3,4,0,6,7,8
-$ python main.py ast 1,2,5,3,4,0,6,7,8
-$ python main.py ids random
-$ python main.py ast0 random
-$ python main.py ast1 random
-$ python main.py ast2 random
-"""
+
 import resource
 import sys
 
@@ -49,8 +43,16 @@ def solvable(state):
     return inversions % 2 == 0
 
 def main():
-    for i in range(100):
-        if sys.argv[2] == 'random':
+    alg = sys.argv[1]
+    state_arg = sys.argv[2]
+
+    if state_arg == 'random':
+        n = int(sys.argv[3]) if len(sys.argv) > 3 else 5
+    else:
+        n = 1
+
+    for i in range(n):
+        if state_arg == 'random':
             while True:
                 p = Board(np.random.permutation(9))
                 if solvable(p.state):
@@ -59,8 +61,8 @@ def main():
                 else:
                     print("generated unsolvable state")
         else:
-            p = Board(np.array(eval(sys.argv[2])))
-        alg = sys.argv[1]
+            p = Board(np.array(eval(state_arg)))
+
         if alg == 'ids':
             s = IDS(p)
         elif alg == 'ast0':
