@@ -6,8 +6,14 @@
 # GNU General Public License v3.0 (GPLv3).
 # See <https://www.gnu.org/licenses/gpl-3.0.en.html> for details.
 # ==============================================================================
+# Modifications
+# 2026-06-08: Igakg
+#   - [変更内容1: ゴール状態を1,2,3,4,5,6,7,8,0から1,2,3,8,0,4,7,6,5に変更し、GOAL定数として定義]
+# ==============================================================================
 
 import numpy as np
+
+GOAL = np.array([1, 2, 3, 8, 0, 4, 7, 6, 5])
 
 
 class Board:
@@ -39,7 +45,7 @@ class Board:
                + str(self.state[6:]) + ' ' + str(self.depth) + str(self.operator) + '\n'
 
     def goal_test(self):
-        if np.array_equal(self.state, np.arange(9)):
+        if np.array_equal(self.state, GOAL):
             return True
         else:
             return False
@@ -51,7 +57,7 @@ class Board:
 
     def manhattan(self):
         state = self.index(self.state)
-        goal = self.index(np.arange(9))
+        goal = self.index(GOAL)
         return sum((abs(state // 3 - goal // 3) + abs(state % 3 - goal % 3))[1:])
 
     @staticmethod
