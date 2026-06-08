@@ -18,6 +18,8 @@
 #   - [変更内容7: ast0,ast1,ast2クラスをインポートするように変更、入力に応じてこれらのクラスを用いるように変更]
 # 2026-06-07: Igakg
 #   - [変更内容8: 第3引数でランダム実行回数を指定可能に変更、状態指定時は1回のみ実行]
+# 2026-06-08: Igakg
+#   - [変更内容9: ゴール状態の変更(board.py)に合わせ、solvable関数をGOALの転倒数の偶奇と比較するように修正]
 # ==============================================================================
 
 import resource
@@ -27,20 +29,22 @@ import numpy as np
 from astar0 import AStar0
 from astar1 import AStar1
 from astar2 import AStar2
-from board import Board
+from board import Board, GOAL
 from ids import IDS
 
-def solvable(state):
-    
+def count_inversions(state):
     flat_board = [num for num in state if num != 0]
-    
+
     inversions = 0
     for i in range(len(flat_board)):
         for j in range(i + 1, len(flat_board)):
             if flat_board[i] > flat_board[j]:
-            	inversions += 1
-                
-    return inversions % 2 == 0
+                inversions += 1
+
+    return inversions
+
+def solvable(state):
+    return count_inversions(state) % 2 == count_inversions(GOAL) % 2
 
 def main():
     alg = sys.argv[1]
