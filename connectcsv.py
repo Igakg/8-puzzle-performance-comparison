@@ -1,11 +1,15 @@
+# Modifications
+# 2026-06-10: Igakg
+#   - globの結果からoutput_{method}_combined.csv自身を除外し、再実行時の自己参照を防止
 from sys import argv
 import glob
 
 def connectcsv():
     method = argv[1]
-    files = glob.glob(f'output_{method}*.csv')
+    combined_name = f'output_{method}_combined.csv'
+    files = [f for f in glob.glob(f'output_{method}*.csv') if f != combined_name]
 
-    with open(f'output_{method}_combined.csv', 'w') as outfile:
+    with open(combined_name, 'w') as outfile:
         outfile.write('cost_of_path,nodes_expanded,nodes_explored,search_depth,max_search_depth\n')
         for fname in files:
             with open(fname) as infile:
